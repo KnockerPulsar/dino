@@ -84,8 +84,8 @@ def load_pretrained_weights(model, pretrained_weights, checkpoint_key, model_nam
             print(key,":::", val, "\n")
             if(isinstance(val, OrderedDict)):
                 for item in val:
-                    print("\t", item[0], ":::", item[1])
-                    item[0] = item[0].replace("module.linear", "")
+                    print("\t","===", item[0], "===")
+                    item = item.replace("module.linear", "")
 
 
 
