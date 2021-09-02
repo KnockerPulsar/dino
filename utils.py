@@ -77,17 +77,15 @@ def load_pretrained_weights(model, pretrained_weights, checkpoint_key, model_nam
         # remove `module.` prefix
         state_dict = {k.replace("module.", ""): v for k, v in state_dict.items()}
         # remove `backbone.` prefix induced by multicrop wrapper
-        state_dict = {k.replace("backbone.", ""): v for k, v in state_dict.items()}
+        state_dict = {k.replace("backbone.", ""): v for k, v in state_dict.items()}      
 
-        # let's see how linear weights are named...
-        for key,val in state_dict.items():
-            print(key,":::", val, "\n")
-            if(isinstance(val, OrderedDict)):
-                for item in val:
-                    print("\t","===", item[0], "===")
-                    item = item.replace("module.linear", "")
-
-
+        new_weights = OrderedDict()
+        for key, value in state_dict.items():
+            if(key=="state_dict"):
+                for k,v in value.items():
+                    clean_k = k.replace("module.linear.","")
+                    new_weights[clean_k] = v
+                state_dict[key] = new_weights
 
         msg = model.load_state_dict(state_dict, strict=False)
         print('Pretrained weights found at {} and loaded with msg: {}'.format(pretrained_weights, msg))

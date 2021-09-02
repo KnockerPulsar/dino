@@ -82,10 +82,10 @@ def eval_linear(args):
     else:
         print(f"Unknow architecture: {args.arch}")
         sys.exit(1)
-    model.cuda()
+    #model.cuda()
     model.eval()
     # load weights to evaluate
-    utils.load_pretrained_weights(model, args.pretrained_weights, args.checkpoint_key, args.arch, args.patch_size)
+    utils.load_pretrained_weights(None, args.pretrained_weights, args.checkpoint_key, args.arch, args.patch_size)
     print(f"Model {args.arch} built.")
 
     linear_classifier = LinearClassifier(embed_dim, num_labels=args.num_labels)
