@@ -24,7 +24,7 @@ import math
 import random
 import datetime
 import subprocess
-from collections import defaultdict, deque
+from collections import OrderedDict, defaultdict, deque
 
 import numpy as np
 import torch
@@ -82,7 +82,7 @@ def load_pretrained_weights(model, pretrained_weights, checkpoint_key, model_nam
         # let's see how linear weights are named...
         for key,val in state_dict.items():
             print(key,":::", val, "\n")
-            if(val is dict):
+            if(isinstance(val, OrderedDict)):
                 for k, v in val:
                     print("\t", k, ":::", v)
                     k = k.replace("module.linear", "")
