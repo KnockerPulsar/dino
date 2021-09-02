@@ -80,7 +80,7 @@ def load_pretrained_weights(model, pretrained_weights, checkpoint_key, model_nam
         state_dict = {k.replace("backbone.", ""): v for k, v in state_dict.items()}
 
         # let's see how linear weights are named...
-        for key,val in state_dict.items():
+        for key,val in state_dict["state_dict"]:
             print(key,":::", val, "\n")
             
 
