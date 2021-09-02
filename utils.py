@@ -81,7 +81,7 @@ def load_pretrained_weights(model, pretrained_weights, checkpoint_key, model_nam
 
         # let's see how linear weights are named...
         for key,val in state_dict.items():
-            print(key, val, "\n")
+            print(key,":::", val, "\n")
             
 
         msg = model.load_state_dict(state_dict, strict=False)
